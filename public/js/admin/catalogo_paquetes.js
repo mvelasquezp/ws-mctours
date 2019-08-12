@@ -69,6 +69,16 @@ async function ActivarEdicionPaquete(event) {
     alert('Editar!');
 }
 
+async function CalculaPrecioPaquetes() {
+    let inputs = $('.form-check-input:checked');
+    let CostoPaquete = 0;
+    $.each(inputs, function () {
+        let input = $(this);
+        CostoPaquete += parseFloat(input.data('precio'));
+    });
+    document.getElementById('rg-precio').value = CostoPaquete;
+}
+
 EscribirListaPaquetes = () => {
     let tbody = $('<tbody>');
     for (paquete of ListaPaquetes) {
@@ -180,5 +190,6 @@ ModalRegistroOnShow = (event) => {
 IniciarComponentes = () => {
     $('#modal-registro').on('show.bs.modal', ModalRegistroOnShow);
     $('#modal-registro .btn-primary').on('click', RegistraPaquete);
+    $('.form-check-input').on('click', CalculaPrecioPaquetes);
     CargarListaPaquetes();
 }

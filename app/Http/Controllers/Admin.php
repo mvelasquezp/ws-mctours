@@ -81,4 +81,13 @@ class Admin extends Controller {
         $idiomas = DB::select("call sp_mctours_lista_idiomas");
         return view("admin.home")->with(compact("modulo","script","idiomas","lugares"));
     }
+
+    //programacion
+
+    public function programacion_tours() {
+        $modulo = "admin.programacion_tours";
+        $script = "js/admin/programacion_tours.js";
+        $ciudades = DB::select("call sp_mctours_lista_ciudades");
+        return view("admin.home")->with(compact("modulo","script","ciudades"));
+    }
 }

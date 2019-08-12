@@ -1,66 +1,12 @@
 <html class="no-js">
     <head>
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link rel="shortcut icon" href="img/fav.png">
-		<meta name="description" content="">
-		<meta name="keywords" content="">
-		<meta charset="utf-8">
-
-		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('css/linearicons.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/nice-select.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/owl.carousel.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+        <title>Bienvenido a MC Tours</title>
+        @include('publico.common_head')
     </head>
     <body>
-        <header id="header">
-            <div class="header-top">
-                <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-sm-6 col-6 header-top-left">
-                        <ul>
-                    	@foreach($idiomas as $idioma)
-                        	@if(strcmp($idioma->defecto,"S") == 0)
-                        	<li class="active"><a href="{{ url($idioma->alias) }}" class="text-lowercase">{{ $idioma->idioma }}</a></li>
-                        	@else
-                        	<li><a href="{{ url($idioma->alias) }}" class="text-lowercase">{{ $idioma->idioma }}</a></li>
-                        	@endif
-                    	@endforeach
-                        </ul>			
-                    </div>
-                    <div class="col-lg-6 col-sm-6 col-6 header-top-right">
-                        <div class="header-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-dribbble"></i></a>
-                            <a href="#"><i class="fa fa-behance"></i></a>
-                        </div>
-                    </div>
-                </div>			  					
-                </div>
-            </div>
-            <div class="container main-menu">
-                <div class="row align-items-center justify-content-between d-flex">
-                    <div id="logo">
-                    <a href="index.html"><img src="img/logo.png" alt="" title="MC Tours" /></a>
-                    </div>
-                    <nav id="nav-menu-container">
-                    <ul class="nav-menu">
-                        <li><a href="index.html">{{ $textos["navbar_inicio"] }}</a></li>
-                        <li><a href="about.html">{{ $textos["navbar_nosotros"] }}</a></li>
-                        <li><a href="packages.html">{{ $textos["navbar_destinos"] }}</a></li>
-                        <li><a href="packages.html">{{ $textos["navbar_paquetes"] }}</a></li>
-                        <li><a href="contact.html">{{ $textos["navbar_contacto"] }}</a></li>
-                    </ul>
-                    </nav><!-- #nav-menu-container -->					      		  
-                </div>
-            </div>
-        </header><!-- #header -->
+        <!-- header -->
+        @include('publico.common_header')
+        <!-- fin header -->
         
         <!-- start banner Area -->
         <section class="banner-area relative">
@@ -83,12 +29,17 @@
                                 <a class="nav-link text-uppercase" id="hotel-tab" data-toggle="tab" href="#hotel" role="tab" aria-controls="hotel" aria-selected="false">{{ $textos["form_pasajes"] }}</a>
                             </li>
                         </ul>
-                        <div class="tab-content" id="myTabContent">
+                        <div class="tab-content" id="tab-container">
                             <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
                                 <form class="form-wrap">
-                                    <input type="text" class="form-control" name="destino" placeholder="{{ $textos['form_paquete_destino'] }}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ $textos['form_paquete_destino'] }} '">
+                                    <select id="pq-destino" class="form-control">
+                                        <option value="0" selected="true">{{ $textos['form_paquete_destino'] }}</option>
+                                        @foreach($ciudades as $ciudad)
+                                        <option value="{{ $ciudad->value }}">{{ $ciudad->text }}</option>
+                                        @endforeach
+                                    </select>
                                     <br>
-                                    <input type="text" class="form-control date-picker" name="fecha" placeholder="{{ $textos['form_paquete_fecha'] }}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ $textos['form_paquete_fecha'] }} '">
+                                    <input type="text" class="form-control date-picker" id="pq-fecha" placeholder="{{ $textos['form_paquete_fecha'] }}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ $textos['form_paquete_fecha'] }} '">
                                     <br>
                                     <a href="#" class="primary-btn text-uppercase">{{ $textos["form_paquete_boton"] }}</a>
                                 </form>
@@ -385,75 +336,10 @@
         </div>
         <!-- end modals -->
 
-        <!-- start footer Area -->		
-        <footer class="footer-area section-gap">
-            <div class="container">
-
-                <div class="row">
-                    <div class="col-lg-3  col-md-6 col-sm-6">
-                        <div class="single-footer-widget">
-                            <h6>{{ $textos["acerca_de"] }}</h6>
-                            <p>{{ $textos["acerca_descripcion"] }}</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-footer-widget">
-                            <h6></h6>
-                            <div class="row">
-                                <div class="col">
-                                    <span></span>
-                                </div>
-                            </div>							
-                        </div>
-                    </div>							
-                    <div class="col-lg-6  col-md-6 col-sm-6">
-                        <div class="single-footer-widget">
-                            <h6>{{ $textos["acerca_noticias"] }}</h6>
-                            <p>{{ $textos["acerca_texto"] }}</p>								
-                            <div id="mc_embed_signup">
-                                <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscription relative">
-                                    <div class="input-group d-flex flex-row">
-                                        <input name="email" placeholder="{{ $textos['acerca_email'] }}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ $textos['acerca_email'] }} '" required="" type="email">
-                                        <button class="btn bb-btn"><span class="lnr lnr-location"></span></button>		
-                                    </div>
-                                    <div class="mt-10 info"></div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>						
-                </div>
-
-                <div class="row footer-bottom d-flex justify-content-between align-items-center">
-                    <p class="col-lg-8 col-sm-12 footer-text m-0">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> MC Tours - Todos los derechos reservados
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
-                    <div class="col-lg-4 col-sm-12 footer-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-dribbble"></i></a>
-                        <a href="#"><i class="fa fa-behance"></i></a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <!-- start footer Area -->
+        @include('publico.common_footer')
         <!-- End footer Area -->	
-
-        <script src="{{ asset('js/vendor/jquery-2.2.4.min.js') }}"></script>
-        <script src="{{ asset('js/popper.min.js') }}"></script>
-        <script src="{{ asset('js/vendor/bootstrap.min.js') }}"></script>
-        <!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script-->
-        <script src="{{ asset('js/jquery-ui.js') }}"></script>
-        <script src="{{ asset('js/easing.min.js') }}"></script>
-        <script src="{{ asset('js/hoverIntent.js') }}"></script>
-        <script src="{{ asset('js/superfish.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.ajaxchimp.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
-        <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-        <script src="{{ asset('js/mail-script.js') }}"></script>
-        <script src="{{ asset('js/main.js') }}"></script>
+        @include('publico.common_scripts')
         <script>
             async function CargarInfoDestino(event) {
                 let a = event.relatedTarget.dataset;
@@ -528,6 +414,7 @@
                 }
             }
             $('#modal-destino').on('show.bs.modal', CargarInfoDestino);
+            $('#pq-destino option[value=0]').prop('selected',true);
         </script>
     </body>
 </html>

@@ -76,9 +76,10 @@
                                             <table class="table table-sm table-striped table-hover">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-primary">Ciudad</th>
-                                                        <th class="text-primary">Lugar</th>
-                                                        <th class="text-primary"></th>
+                                                        <th class="text-primary" width="30%"">Ciudad</th>
+                                                        <th class="text-primary" width="50%"">Lugar</th>
+                                                        <th class="text-primary" width="10%"">Precio</th>
+                                                        <th class="text-primary" width="10%""></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -86,9 +87,10 @@
                                                     <tr>
                                                         <td class="text-gray-900">{{ $lugar->ciudad }}</td>
                                                         <td class="text-gray-900">{{ $lugar->nombre }}</td>
+                                                        <td class="text-gray-900">{{ $lugar->precio }}</td>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="{{ $lugar->lugar }}" id="input-{{ $i }}">
+                                                                <input class="form-check-input" type="checkbox" value="{{ $lugar->lugar }}" data-precio="{{ $lugar->precio }}" id="input-{{ $i }}">
                                                                 <label class="form-check-label text-gray-900" for="input-{{ $i }}">Seleccionar</label>
                                                             </div>
                                                         </td>

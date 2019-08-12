@@ -73,6 +73,10 @@
                                                     </div>
                                                     @endforeach
                                                 </div>
+                                                <div class="form-group">
+                                                    <label class="text-primary" for="rg-precio">Precio</label>
+                                                    <input type="text" class="form-control form-control-sm" id="rg-precio" placeholder="Indique el precio del destino">
+                                                </div>
                                             </div>
                                             <div class="col-4">
                                                 <div class="alert bg-light p-2 h-100" id="img-lista">

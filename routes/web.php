@@ -45,12 +45,23 @@ Route::group(["prefix" => "admin"], function() {
             Route::any("guardar-paquete", "Admin@guardar_paquete");
         });
     });
+    //programacion
+    Route::group(["prefix" => "programacion"], function() {
+        Route::get("tours", "Admin@programacion_tours");
+        //peticiones ajax
+        Route::group(["prefix" => "ajax", "namespace" => "Ajax"], function () {
+            Route::any("lista-lugares-ciudad", "Admin@lista_lugares_ciudad");
+        });
+    });
 });
 //pagina principal
 Route::group(["prefix" => "{lang}"], function() {
     Route::get("/", "Publico@home");
+    Route::get("nosotros", "Publico@nosotros");
+    Route::get("destinos", "Publico@destinos");
+    Route::get("paquetes", "Publico@paquetes_viaje");
+    Route::get("contacto", "Publico@contacto");
     Route::get("no-language", "Publico@errlanguage");
-    Route::get("paquetes-viaje", "Publico@paquetes_viaje");
     //ajax
     Route::group(["prefix" => "ajax", "namespace" => "Ajax"], function() {
         Route::any("detalle-destino", "Publico@detalle_destino");

@@ -24,52 +24,59 @@ async function RegistraLugar(event) {
     }
     else {
         let CiudadDestino = document.getElementById('rg-ciudad').value;
+        let PrecioDestino = document.getElementById('rg-precio').value;
         if(CiudadDestino != 0) {
-            let TabsIdiomas = $('.tab-pane');
-            let ContenidosTexto = [];
-            let ready = true;
-            $.each(TabsIdiomas, function() {
-                let tab = $(this);
-                let tabId = tab.attr('id');
-                ContenidosTexto.push({
-                    idioma: tab.data('idioma'),
-                    nombre: $('#' + tabId + ' input').val(),
-                    descripcion: $('#' + tabId + ' textarea').val()
+            if (PrecioDestino != '' && !isNaN(PrecioDestino)) {
+                let TabsIdiomas = $('.tab-pane');
+                let ContenidosTexto = [];
+                let ready = true;
+                $.each(TabsIdiomas, function () {
+                    let tab = $(this);
+                    let tabId = tab.attr('id');
+                    ContenidosTexto.push({
+                        idioma: tab.data('idioma'),
+                        nombre: $('#' + tabId + ' input').val(),
+                        descripcion: $('#' + tabId + ' textarea').val()
+                    });
+                    ready == ready && (ContenidosTexto.nombre != '') && (ContenidosTexto.descripcion != '');
                 });
-                ready == ready && (ContenidosTexto.nombre != '') && (ContenidosTexto.descripcion != '');
-            });
-            if(!ready) {
-                alert('No ha completado los textos para todos los idiomas. Recuerde completarlos más adelante.');
-            }
-            //formatea las imagenes
-            let ArrayImg = [];
-            for(imagen of ListaImagenes) {
-                ArrayImg.push(imagen.substring(23));
-            }
-            let result;
-            try {
-                result = await $.ajax({
-                    url: 'ajax/guardar-destino',
-                    method: 'post',
-                    data: {
-                        ciudad: CiudadDestino,
-                        imagenes: ArrayImg,
-                        contenidos: ContenidosTexto
-                    },
-                    dataType: 'json'
-                });
-                if (result.error) {
-                    alert(result.error);
+                if (!ready) {
+                    alert('No ha completado los textos para todos los idiomas. Recuerde completarlos más adelante.');
+                }
+                //formatea las imagenes
+                let ArrayImg = [];
+                for (imagen of ListaImagenes) {
+                    ArrayImg.push(imagen.substring(23));
+                }
+                let result;
+                try {
+                    result = await $.ajax({
+                        url: 'ajax/guardar-destino',
+                        method: 'post',
+                        data: {
+                            ciudad: CiudadDestino,
+                            imagenes: ArrayImg,
+                            contenidos: ContenidosTexto,
+                            precio: PrecioDestino
+                        },
+                        dataType: 'json'
+                    });
+                    if (result.error) {
+                        alert(result.error);
+                        return;
+                    }
+                    $('#modal-registro').modal('hide');
+                    alert('Destino registrado con éxito');
+                    $('#table-container').empty();
+                    CargarListaDestinos();
+                }
+                catch (err) {
+                    console.error(err);
                     return;
                 }
-                $('#modal-registro').modal('hide');
-                alert('Destino registrado con éxito');
-                $('#table-container').empty();
-                CargarListaDestinos();
             }
-            catch(err) {
-                console.error(err);
-                return;
+            else {
+                alert('Ingrese un precio válido.');
             }
         }
         else {
@@ -129,6 +136,8 @@ EscribirListaDestinos = () => {
             ).append(TdNombre).append(
                 $('<td>').html(destino.ciudad).addClass('text-gray-800')
             ).append(TdDescripcion).append(
+                $('<td>').html('S/ ' + destino.precio).addClass('text-gray-800')
+            ).append(
                 $('<td>').append(
                     $('<a>').append(
                         $('<i>').addClass('fas fa-edit')
@@ -150,6 +159,8 @@ EscribirListaDestinos = () => {
                 $('<th>').html('Ciudad').addClass('text-gray-900').attr('width', '10%')
             ).append(
                 $('<th>').html('Descripción').addClass('text-gray-900')
+            ).append(
+                $('<th>').html('Precio').addClass('text-gray-900').attr('width', '5%')
             ).append(
                 $('<th>').html('').addClass('text-gray-900').attr('width', '5%')
             )

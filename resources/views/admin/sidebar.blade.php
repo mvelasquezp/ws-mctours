@@ -68,9 +68,15 @@
                 </li>
                 <!-- Nav Item - Charts -->
                 <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menuProgramacion" aria-expanded="true" aria-controls="menuProgramacion">
+                        <i class="far fa-w fa-calendar-check"></i>
+                        <span>Programación</span>
+                    </a>
+                    <div id="menuProgramacion" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ url('admin/programacion/tours') }}">Programar salidas</a>
+                    </div>
+                    </div>
                 </li>
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">

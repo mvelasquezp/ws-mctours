@@ -108,10 +108,11 @@ class Admin extends Controller {
 
     public function guardar_destino() {
         extract(request()->input());
-        if(isset($ciudad,$imagenes,$contenidos)) {
+        if(isset($ciudad,$imagenes,$contenidos,$precio)) {
             //inserta el lugar
             $id_lugar = DB::table("tours_lugares")->insertGetId([
-                "id_ciudad" => $ciudad
+                "id_ciudad" => $ciudad,
+                "im_precio" => $precio
             ]);
             //inserta los labels
             foreach($contenidos as $contenido) {
@@ -194,6 +195,21 @@ class Admin extends Controller {
             //respuesta
             return response()->json([
                 "data" => "ok"
+            ]);
+        }
+        return response()->json([
+            "error" => "Parámetros incorrectos"
+        ]);
+    }
+
+    //programacion
+
+    public function lista_lugares_ciudad() {
+        extract(request()->input());
+        if(isset($ciudad)) {
+            $lugares = DB::select("call sp_mctours_combo_lugares(?)", [$ciudad]);
+            return response()->json([
+                "data" => compact("lugares","ciudad")
             ]);
         }
         return response()->json([
