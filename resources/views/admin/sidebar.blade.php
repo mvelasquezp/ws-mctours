@@ -75,6 +75,7 @@
                     <div id="menuProgramacion" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ url('admin/programacion/tours') }}">Programar salidas</a>
+                        <a class="collapse-item" href="{{ url('admin/programacion/paquetes') }}">Programar paquetes</a>
                     </div>
                     </div>
                 </li>

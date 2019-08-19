@@ -48,9 +48,13 @@ Route::group(["prefix" => "admin"], function() {
     //programacion
     Route::group(["prefix" => "programacion"], function() {
         Route::get("tours", "Admin@programacion_tours");
+        Route::get("paquetes", "Admin@programacion_paquetes");
         //peticiones ajax
         Route::group(["prefix" => "ajax", "namespace" => "Ajax"], function () {
             Route::any("lista-lugares-ciudad", "Admin@lista_lugares_ciudad");
+            Route::get("lista-proximas-salidas", "Admin@lista_proximas_salidas");
+            Route::any("lista-salidas-dia", "Admin@lista_salidas_dia");
+            Route::any("programar-salida", "Admin@programar_salida");
         });
     });
 });

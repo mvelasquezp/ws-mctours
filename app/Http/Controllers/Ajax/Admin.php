@@ -216,4 +216,46 @@ class Admin extends Controller {
             "error" => "Parámetros incorrectos"
         ]);
     }
+
+    public function lista_proximas_salidas() {
+        $salidas = DB::select("call sp_mctours_proximas_salidas");
+        return response()->json([
+            "data" => compact("salidas")
+        ]);
+    }
+
+    public function lista_salidas_dia() {
+        extract(request()->input());
+        if(isset($fecha, $destino)) {
+            $salidas = DB::select("call sp_mctours_salidas_dia(?,?)", [$destino, $fecha]);
+            return response()->json([
+                "data" => compact("salidas")
+            ]);
+        }
+        return response()->json([
+            "error" => "Parámetros incorrectos"
+        ]);
+    }
+
+    public function programar_salida() {
+        extract(request()->input());
+        if(isset($fecha, $hora, $destino, $cupos, $uregistra)) {
+            $fecha = explode("/", $fecha);
+            $fecha = array_reverse($fecha);
+            $fecha = implode("-", $fecha);
+            DB::table("tours_salidas_cat")->insert([
+                "id_lugar" => $destino,
+                "fe_salida" => $fecha . " " . $hora . ":00",
+                "nu_capacidad" => $cupos,
+                "nu_limite_paq" => 0,
+                "usu_registra" => $uregistra
+            ]);
+            return response()->json([
+                "data" => "ok"
+            ]);
+        }
+        return response()->json([
+            "error" => "Parámetros incorrectos"
+        ]);
+    }
 }

@@ -88,6 +88,15 @@ class Admin extends Controller {
         $modulo = "admin.programacion_tours";
         $script = "js/admin/programacion_tours.js";
         $ciudades = DB::select("call sp_mctours_lista_ciudades");
-        return view("admin.home")->with(compact("modulo","script","ciudades"));
+        $usuario = Auth::user()->id_usuario;
+        $excss = ["https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css"];
+        $exjs = [ asset("js/gijgo.1.9.13.min.js") ];
+        return view("admin.home")->with(compact("modulo","script","ciudades","usuario","excss","exjs"));
+    }
+
+    public function programacion_paquetes() {
+        $modulo = "admin.programacion_paquetes";
+        $script = "js/admin/programacion_paquetes.js";
+        return view("admin.home")->with(compact("modulo","script"));
     }
 }

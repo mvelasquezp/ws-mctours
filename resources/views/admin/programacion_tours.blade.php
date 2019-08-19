@@ -25,7 +25,11 @@
                                             <form>
                                                 <div class="form-group">
                                                     <label for="rg-fecha" class="text-gray-900">Fecha de la salida</label>
-                                                    <input id="rg-fecha" type="text" class="form-control form-control-sm" placeholder="Ingrese fecha">
+                                                    <input id="rg-fecha" type="text" class="form-control form-control-sm datepicker" placeholder="Ingrese fecha">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="rg-hora" class="text-gray-900">Hora de la salida</label>
+                                                    <input id="rg-hora" type="text" class="form-control form-control-sm timepicker" placeholder="Ingrese hora">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="rg-ciudad" class="text-gray-900">Seleccione la ciudad</label>
@@ -39,26 +43,26 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="rg-destino" class="text-gray-900">Seleccione el destino</label>
-                                                    <select id="rg-destino" class="form-control form-control-sm"></select>
+                                                    <select id="rg-destino" class="form-control form-control-sm">
+                                                        <option value="0" selected>- Primero seleccione ciudad -</option>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="rg-cupos" class="text-gray-900">Cantidad de cupos</label>
                                                     <input id="rg-cupos" type="text" class="form-control form-control-sm" placeholder="¿Cuántos cupos se venderán?">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="rg-cupos" class="text-gray-900">Cupos máximos para paquetes</label>
-                                                    <input id="rg-cupos" type="text" class="form-control form-control-sm" placeholder="Máximo de cupos para paquetes de viaje">
-                                                </div>
-                                                <button type="submit" class="btn btn-primary">Guardar</button>
                                             </form>
                                         </div>
-                                        <div class="col-7"></div>
+                                        <div class="col-7" id="dv-salidas"></div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+                                    <button type="button" class="btn btn-sm btn-light" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> Guardar</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <script>
+                        const IdUsuario = {{ $usuario }};
+                    </script>
